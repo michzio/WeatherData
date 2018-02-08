@@ -1,5 +1,6 @@
 
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using WeatherData.Models;
 
 namespace WeatherData.Repositories 
@@ -12,7 +13,7 @@ namespace WeatherData.Repositories
 		}
 
 		public WeatherData.Models.WeatherData GetLatest() { 
-			var weatherData = DatabaseContext.WeatherDatas.OrderByDescending(wd => wd.DateTime).FirstOrDefault();
+			var weatherData = DatabaseContext.WeatherDatas.OrderByDescending(wd => wd.DateTime).Include(wd => wd.Address).FirstOrDefault();
 			return weatherData; 
 		}
 

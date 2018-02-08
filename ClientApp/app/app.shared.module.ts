@@ -21,6 +21,7 @@ import { AuthGuard } from './services/auth-guard.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AddressService } from './services/address.service';
 import { WeatherDataService } from './services/weather-data.service';
+import { EnumMembersPipe } from './pipes/enum-members.pipe';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,9 @@ import { WeatherDataService } from './services/weather-data.service';
         NavMenuComponent,
         AdminComponent,
         HomeComponent,
-        LoginComponent
+        LoginComponent, 
+
+        EnumMembersPipe
     ],
     imports: [
         CommonModule,
@@ -53,7 +56,9 @@ import { WeatherDataService } from './services/weather-data.service';
         }, 
         AuthGuard, 
         AddressService, 
-        WeatherDataService
+        WeatherDataService, 
+
+        EnumMembersPipe
     ]
 })
 export class AppModuleShared {

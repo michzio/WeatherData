@@ -11,6 +11,7 @@ using WeatherData.ViewModels;
 
 namespace WeatherData.Controllers 
 {
+    [Route("weather-datas")]
     public class WeatherDataController : BaseController
     {
 
@@ -27,7 +28,7 @@ namespace WeatherData.Controllers
         }
 
         // GET: /weather-datas/latest
-        [HttpGet]
+        [HttpGet("latest")]
         public async Task<IActionResult> GetLatestWeatherData() 
         {
             try { 
@@ -36,7 +37,7 @@ namespace WeatherData.Controllers
                     return NotFound(new { error = String.Format("Weather Data has not been found.")});
                 }
 
-                WeatherDataViewModel vmWeatherData = new WeatherDataViewModel(weatherData); 
+                WeatherDataViewModel vmWeatherData = new WeatherDataViewModel(weatherData, true); 
                 return Ok(vmWeatherData);
 
             } catch(Exception e) { 
@@ -79,7 +80,7 @@ namespace WeatherData.Controllers
                     Humidity = vmWeatherData.Humidity, 
                     WindSpeed = vmWeatherData.WindSpeed, 
                     PrecipitationProbability = vmWeatherData.PrecipitationProbability,
-                    DateTime = (vmWeatherData.DateTime != null) ?  vmWeatherData.DateTime : DateTime.Now, 
+                    DateTime = DateTime.Now, 
                     AddressId = vmWeatherData.AddressId // if Address doesn't exists it throws error
                }; 
 

@@ -1,2 +1,16 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
+<h1>Newest Weather Data</h1>
+
+<div *ngIf="weatherData != null; else NoWeatherData">
+    <p>Temperature: {{ weatherData.temperature }} C</p>
+    <p>Weather Type: {{ weatherTypes[weatherData.weather] }}</p>
+    <p>Humidity: {{ weatherData.temperature }} %</p>
+    <p>Wind Speed: {{ weatherData.windSpeed }} </p>
+    <p>Precipitation Pobability: {{ weatherData.precipitationProbability }}</p>
+    <p>Location: {{ weatherData.address.city }} </p>
+</div> 
+<ng-template #NoWeatherData>
+    <div> 
+        No weather data in database. Pleas add some data using your admin account. <br />
+        You can log into your account using username: admin and password: PaSSword12!. 
+    </div>
+</ng-template>

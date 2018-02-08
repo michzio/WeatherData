@@ -1,4 +1,9 @@
-<h1>Weather Data - Management Panel</h1>
+<h1>Weather Data - Management Panel (<a style="cursor:pointer" (click)="logout($event)">Logout</a>)</h1>
+
+<div class="alert alert-info" role="alert" *ngIf="updateMessage != null && !updateFailed">{{ updateMessage }}</div>
+<div class="alert alert-danger" role="alert" *ngIf="updateFailed && weatherForm.errors?.update">
+        <strong>Warning:</strong> {{ weatherForm.errors?.update }}
+</div>
 
 <form class="form-add-weather-data" [formGroup]="weatherForm" (ngSubmit)="onSubmit($event)">
     <div class="row">
@@ -11,6 +16,77 @@
                     {{ address.city }}
                 </option>
             </select>
+            <div class="input-errors" *ngIf="updateFailed || address.dirty || address.touched"> 
+                <div *ngIf="updateFailed && address.errors?.required">Address is required.</div>
+            </div>
         </div>
    </div>
+   <div class="row">
+       <label for="temperature">Temperature:</label>
+       <div> 
+            <input id="temperature" formControlName="temperature" name="temperature" class="form-control" 
+                type="text" [ngClass]="{'invalid': updateFailed && temperature.invalid}" required />
+            <div class="input-errors" *ngIf="updateFailed || temperature.dirty || temperature.touched"> 
+                <div *ngIf="updateFailed && temperature.errors?.required">Temperature is required.</div>
+            </div>
+       </div>
+   </div>
+
+   <div class="row">
+        <label for="weatherType">Weather Type:</label>
+        <div>
+            <select id="weatherType" formControlName="weatherType" name="weatherType" class="form-control" 
+                [ngClass]="{'invalid': updateFailed && weatherType.invalid}" required>
+                <option value="" disabled selected>Choose Weather Type</option>
+                <option *ngFor="let weatherType of weatherTypes | members" [value]="weatherType.key">
+                    {{ weatherType.value }}
+                </option>
+            </select>
+            <div class="input-errors" *ngIf="updateFailed || weatherType.dirty || weatherType.touched"> 
+                <div *ngIf="updateFailed && weatherType.errors?.required">Weather type is required.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <label for="humidity">Humidity:</label>
+        <div> 
+            <input id="humidity" formControlName="humidity" name="humidity" class="form-control" 
+                    type="text" [ngClass]="{'invalid': updateFailed && humidity.invalid}" required />
+            <div class="input-errors" *ngIf="updateFailed || humidity.dirty || humidity.touched"> 
+                <div *ngIf="updateFailed && humidity.errors?.required">Humidity is required.</div>
+                <div *ngIf="humidity.errors?.min">Humidity should be greater than or equal 0.</div>
+                <div *ngIf="humidity.errors?.max">Humidity should be less than or equal 100.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <label for="windSpeed">Wind Speed:</label>
+        <div> 
+            <input id="windSpeed" formControlName="windSpeed" name="windSpeed" class="form-control" 
+                type="text" [ngClass]="{'invalid': updateFailed && windSpeed.invalid}" required />
+            <div class="input-errors" *ngIf="updateFailed || windSpeed.dirty || windSpeed.touched"> 
+                <div *ngIf="updateFailed && windSpeed.errors?.required">Wind speed is required.</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+            <label for="precipitationProbability">Precipitation Pobability:</label>
+            <div> 
+            <input id="precipitationProbability" formControlName="precipitationProbability" name="precipitationProbability" class="form-control" 
+                        type="text" [ngClass]="{'invalid': updateFailed && precipitationProbability.invalid}" required />
+            <div class="input-errors" *ngIf="updateFailed || precipitationProbability.dirty || precipitationProbability.touched"> 
+                <div *ngIf="updateFailed && precipitationProbability.errors?.required">Precipitation probability is required.</div>
+                <div *ngIf="precipitationProbability.errors?.min">Precipitation probability should be greater than or equal 0.</div>
+                <div *ngIf="precipitationProbability.errors?.max">Precipitation probability should be less than or equal 100.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    </div>
 </form>

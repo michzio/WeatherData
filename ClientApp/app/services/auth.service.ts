@@ -46,17 +46,19 @@ export class AuthService {
     }  
     
 
-    logout() : Observable<boolean> { 
+    logout() : Observable<boolean> {
+        
+        console.log("Logging out..."); 
         
         return this.http.post(this.authLogoutUrl, null)
-            .map(response =>  { 
+            .map( (response) =>  { 
                 // delete token from local storage
-                this.setAuth(null)
-                return true; 
-            })
-            .catch(error => { 
-                return Observable.throw(error); 
-            })
+                this.setAuth(null); 
+                return true 
+            }).catch( (error) => {
+                console.log("Error " + error);
+                return Observable.throw(error);
+            });
     }
 
     // persist authObject in localStorage 
