@@ -20,6 +20,11 @@ namespace WeatherData.DataSeeders {
                     CreateAdminUser(context, roleManager, userManager)
                         .GetAwaiter().GetResult();  
                 }
+
+                if(!context.Addresses.Any()) 
+                {
+                    CreateAddress(context).GetAwaiter().GetResult(); 
+                }
             }
 
         private static string RoleAdministrator = "Administrator";
@@ -53,5 +58,20 @@ namespace WeatherData.DataSeeders {
 
             await context.SaveChangesAsync();  
         }
+
+         private static async Task CreateAddress(DatabaseContext context) { 
+
+             Address address =  new Address() { 
+                 AddressLine1 = "Mogilska",
+                 AddressLine2 = "10/12",
+                 ZipCode = "30-010",
+                 City = "Kraków", 
+                 Region = "małopolskie", 
+                 Country = "Polska"
+             };
+
+             await context.Addresses.AddAsync(address); 
+             await context.SaveChangesAsync(); 
+         }
     }
 }

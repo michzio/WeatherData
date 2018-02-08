@@ -1,3 +1,16 @@
 <h1>Weather Data - Management Panel</h1>
 
-<p>This is a simple example of an Angular component.</p>
+<form class="form-add-weather-data" [formGroup]="weatherForm" (ngSubmit)="onSubmit($event)">
+    <div class="row">
+        <label for="address">Select address from list:</label>
+        <div>
+            <select id="address" formControlName="address" name="address" class="form-control"
+                [ngClass]="{'invalid': updateFailed && address.invalid}">
+                <option value="" disabled selected>Choose Address</option>
+                <option *ngFor="let address of addresses | async" [value]="address.addressId">
+                    {{ address.city }}
+                </option>
+            </select>
+        </div>
+   </div>
+</form>

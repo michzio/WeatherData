@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using WeatherData.Models;
+using WeatherData.Repositories;
 
 namespace WeatherData
 {
@@ -101,7 +102,7 @@ namespace WeatherData
                     });
            
            // registration of custom objects for dependency injection 
-           //services.AddScoped<IUnitOfWork, UnitOfWork>(); 
+           services.AddScoped<IUnitOfWork, UnitOfWork>(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

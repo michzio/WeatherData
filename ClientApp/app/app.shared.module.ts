@@ -19,6 +19,8 @@ import { AuthRefreshInterceptor } from './shared/auth-refresh.interceptor';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { AppRoutingModule } from './app-routing.module';
+import { AddressService } from './services/address.service';
+import { WeatherDataService } from './services/weather-data.service';
 
 @NgModule({
     declarations: [
@@ -49,7 +51,9 @@ import { AppRoutingModule } from './app-routing.module';
             useClass: AuthRefreshInterceptor, 
             multi: true
         }, 
-        AuthGuard
+        AuthGuard, 
+        AddressService, 
+        WeatherDataService
     ]
 })
 export class AppModuleShared {

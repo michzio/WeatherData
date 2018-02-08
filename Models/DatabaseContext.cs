@@ -10,7 +10,7 @@ namespace WeatherData.Models
 
         #region Properties 
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-        public DbSet<WeatherData> WeatherData { get; set; }
+        public DbSet<WeatherData> WeatherDatas { get; set; }
         public DbSet<Address> Addresses { get; set; }
         #endregion
 
