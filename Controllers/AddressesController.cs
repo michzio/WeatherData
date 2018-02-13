@@ -11,7 +11,6 @@ using WeatherData.ViewModels;
 
 namespace WeatherData.Controllers { 
 
-
     [Route("addresses")]
     public class AddressesController : BaseController { 
 
